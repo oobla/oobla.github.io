@@ -44,10 +44,26 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const selectBody = document.querySelector('body');
   const selectHeader = document.querySelector('#header');
+  const whiteLogo = document.querySelector('#whiteLogo');
+  const tealLogo = document.querySelector('#tealLogo');
 
   function toggleScrolled() {
-    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
-    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
+    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) {
+        whiteLogo.style.display === "none";
+        tealLogo.style.display === "none";
+      return;
+    } else {
+      if(window.scrollY > 100){
+        selectBody.classList.add('scrolled');
+        whiteLogo.style.display = "none";
+        tealLogo.style.display = "block";
+      } else {
+        selectBody.classList.remove('scrolled');
+        whiteLogo.style.display = "block";
+        tealLogo.style.display = "none";
+      }
+        
+    }
   }
 
   document.addEventListener('scroll', toggleScrolled);
@@ -65,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrollTop > lastScrollTop && scrollTop > selectHeader.offsetHeight) {
       selectHeader.style.setProperty('position', 'sticky', 'important');
       selectHeader.style.top = `-${header.offsetHeight + 50}px`;
+
     } else if (scrollTop > selectHeader.offsetHeight) {
       selectHeader.style.setProperty('position', 'sticky', 'important');
       selectHeader.style.top = "0";
